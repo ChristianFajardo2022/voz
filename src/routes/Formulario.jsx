@@ -16,7 +16,7 @@ function Formulario() {
     region_id: "1987",
     city: "",
     street: "",
-    promoId: "MMbear",
+    promoid: "MMbear",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -175,12 +175,12 @@ function Formulario() {
             onChange={handleChange}
             className="p-2"
           />
-          <label className="mr-4 hidden">promoId:</label>
+          <label className="mr-4 hidden">promoid:</label>
 
           <input
             type="text"
             name="promoid"
-            value={formData.promoId}
+            value={formData.promoid}
             onChange={handleChange}
             className="p-2 hidden"
           />
