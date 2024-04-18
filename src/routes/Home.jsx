@@ -36,7 +36,7 @@ const Home = () => {
     );
     tl.add(() => setinicioComercial(true));
   };
-  console.log(loading);
+
   const onLoadVideo = () => {
     setVideocargado(true);
   };

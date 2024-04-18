@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <ScrollToTopOnRouteChange />
-        <Home />
+        <Grabadora />
       </>
     ),
     errorElement: <ErrorPage />,
