@@ -4,18 +4,18 @@ import axios from "axios";
 
 function Formulario() {
   const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    tipodocumento: "",
-    numerodocumento: "",
-    email: "",
-    telefono: "",
+    firstname: "",
+    lastname: "",
+    tipo_identificacion_usuario: "",
+    numero_identificacion_usuario: "",
+    username: "",
+    telephone: "",
     nombredestino: "",
     apellidodestino: "",
     pais: "",
-    departamento: "",
-    ciudad: "",
-    direccion: "",
+    region_id: "",
+    city: "",
+    street: "",
     promoId: "MMbear",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -35,35 +35,29 @@ function Formulario() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Aquí puedes enviar los datos a tu servidor utilizando fetch, axios u otra librería
+    // Por ejemplo:
+    fetch("http://newintegration.local/operacionmayo/comprar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Respuesta del servidor:", data);
+        // Aquí puedes hacer algo con la respuesta del servidor si es necesario
 
-    if (!mediaBlobUrl) {
-      setError("Por favor, graba un audio antes de enviar el formulario.");
-      alert("Por favor, graba un audio antes de enviar el formulario.");
-      return;
-    }
-
-    setIsLoading(true);
-    setError("");
-
-    try {
-      const response = await axios.post(
-        "http://newintegration.local/operacionmayo/comprar",
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      console.log("Datos y audio enviados con éxito", response.data);
-      alert("¡Formulario enviado con éxito!");
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error al enviar los datos y audio", error);
-      setError("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
-      setIsLoading(false);
-    }
+        // Redirigir al usuario a la URL con los parámetros en la cadena de consulta
+        const queryString = Object.keys(formData)
+          .map((key) => key + "=" + formData[key])
+          .join("&");
+        window.location.href = `http://newintegration.local/operacionmayo/comprar?${queryString}`;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -83,7 +77,7 @@ function Formulario() {
           <input
             type="text"
             name="firstname"
-            value={formData.nombre}
+            value={formData.firstname}
             onChange={handleChange}
             className="p-2"
           />
@@ -93,7 +87,7 @@ function Formulario() {
           <input
             type="text"
             name="lastname"
-            value={formData.apellido}
+            value={formData.lastname}
             onChange={handleChange}
             className="p-2"
           />
@@ -103,7 +97,7 @@ function Formulario() {
           <input
             type="text"
             name="tipo_identificacion_usuario"
-            value={formData.tipodocumento}
+            value={formData.tipo_identificacion_usuario}
             onChange={handleChange}
             className="p-2"
           />
@@ -113,7 +107,7 @@ function Formulario() {
           <input
             type="text"
             name="numero_identificacion_usuario"
-            value={formData.numerodocumento}
+            value={formData.numero_identificacion_usuario}
             onChange={handleChange}
             className="p-2"
           />
@@ -123,9 +117,9 @@ function Formulario() {
           <input
             type="email"
             name="username"
-            value={formData.email}
+            value={formData.username}
             onChange={handleChange}
-            className="p-2 hidden"
+            className="p-2"
           />
         </div>
         <div className="my-4">
@@ -133,7 +127,7 @@ function Formulario() {
           <input
             type="text"
             name="telephone"
-            value={formData.telefono}
+            value={formData.telephone}
             onChange={handleChange}
             className="p-2"
           />
@@ -173,7 +167,7 @@ function Formulario() {
           <input
             type="text"
             name="region_id"
-            value={formData.departamento}
+            value={formData.region_id}
             onChange={handleChange}
             className="p-2"
           />
@@ -183,7 +177,7 @@ function Formulario() {
           <input
             type="text"
             name="city"
-            value={formData.ciudad}
+            value={formData.city}
             onChange={handleChange}
             className="p-2"
           />
@@ -193,7 +187,7 @@ function Formulario() {
           <input
             type="text"
             name="street"
-            value={formData.direccion}
+            value={formData.street}
             onChange={handleChange}
             className="p-2"
           />
