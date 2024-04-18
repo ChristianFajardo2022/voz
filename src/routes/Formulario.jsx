@@ -33,31 +33,14 @@ function Formulario() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes enviar los datos a tu servidor utilizando fetch, axios u otra librería
-    // Por ejemplo:
-    fetch("http://newintegration.local/operacionmayo/comprar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Respuesta del servidor:", data);
-        // Aquí puedes hacer algo con la respuesta del servidor si es necesario
 
-        // Redirigir al usuario a la URL con los parámetros en la cadena de consulta
-        const queryString = Object.keys(formData)
-          .map((key) => key + "=" + formData[key])
-          .join("&");
-        window.location.href = `http://newintegration.local/operacionmayo/comprar?${queryString}`;
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    // Redirigir al usuario a la URL con los parámetros en la cadena de consulta
+    const queryString = Object.keys(formData)
+      .map((key) => key + "=" + encodeURIComponent(formData[key]))
+      .join("&");
+    window.location.href = `http://newintegration.local/operacionmayo/comprar?${queryString}`;
   };
 
   return (
