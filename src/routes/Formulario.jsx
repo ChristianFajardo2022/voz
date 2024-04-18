@@ -73,7 +73,7 @@ function Formulario() {
         )}
         {isLoading && <p>Loading...</p>}
         <div className="my-4">
-          <label className="mr-4">Nombre:</label>
+          <label className="mr-4">Agrega tu Nombre:</label>
           <input
             type="text"
             name="firstname"
