@@ -14,7 +14,7 @@ function Formulario() {
     apellidodestino: "",
     pais: "",
     region_id: "1987",
-    city: "",
+    city: "Bogota",
     street: "",
     promoid: "MMbear",
   });
