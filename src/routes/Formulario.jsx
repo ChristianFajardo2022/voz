@@ -35,35 +35,29 @@ function Formulario() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Construir la URL del proxy CORS Anywhere y la URL del servidor final
-    const corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
-    const serverUrl = "http://newintegration.local/operacionmayo/comprar";
+    // Aquí puedes enviar los datos a tu servidor utilizando fetch, axios u otra librería
+    // Por ejemplo:
+    fetch("http://newintegration.local/operacionmayo/comprar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Respuesta del servidor:", data);
+        // Aquí puedes hacer algo con la respuesta del servidor si es necesario
 
-    // Realizar la solicitud
-    try {
-      const response = await fetch(corsAnywhereUrl + serverUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        // Redirigir al usuario a la URL con los parámetros en la cadena de consulta
+        const queryString = Object.keys(formData)
+          .map((key) => key + "=" + formData[key])
+          .join("&");
+        window.location.href = `http://newintegration.local/operacionmayo/comprar?${queryString}`;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
-
-      if (!response.ok) {
-        throw new Error("La solicitud no fue exitosa");
-      }
-
-      const data = await response.json();
-      console.log("Respuesta del servidor:", data);
-
-      // Redirigir al usuario a la URL deseada
-      const queryString = Object.keys(formData)
-        .map((key) => key + "=" + formData[key])
-        .join("&");
-      window.location.href = `http://newintegration.local/operacionmayo/comprar?${queryString}`;
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
 
   return (
